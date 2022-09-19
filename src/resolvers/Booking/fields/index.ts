@@ -1,1 +1,1 @@
-//export const BookingFieldResolvers = []
+export const BookingFieldResolvers = [];
