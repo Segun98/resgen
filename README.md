@@ -5,7 +5,7 @@ An opinionated CLI tool to generate GraphQL resolver folders and files
 ## Installing
 
 ```
-$ npm i resgen or yarn add resgen
+$ npm i -g resgen or yarn global add resgen
 ```
 
 ## Commands
@@ -22,7 +22,7 @@ Options:
 ## Usage
 
 ```
-$ regen -n User -s f
+$ rgen -n User -s f
 ```
 
 ```
@@ -32,7 +32,7 @@ The above command generates a User folder with 'mutations' and 'queries' subfold
 ### Skip more than one file
 
 ```
-$ regen -n User -s m q
+$ rgen -n User -s m q
 ```
 
 ```
