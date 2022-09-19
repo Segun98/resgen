@@ -10,6 +10,7 @@ export const filterFunc = (dest: string, appName: string, skip?: String[]) => {
   const isMutationsDir = destArr.some((item) => item === "mutations");
   const isQueriesDir = destArr.some((item) => item === "queries");
 
+  //skip folders passed in cli arg
   if (skip) {
     if (isFieldsDir && skip.includes("f")) return false;
     if (isMutationsDir && skip.includes("m")) return false;
@@ -32,7 +33,7 @@ export const filterFunc = (dest: string, appName: string, skip?: String[]) => {
     return "";
   };
 
-  //import resolvers to the index file
+  //import resolvers to the root index.ts file
   if (resolverVariableName()) {
     importStatements.push(
       `import {${appName}${resolverVariableName()}Resolvers } from "./${filePathName()}"`
@@ -43,6 +44,7 @@ export const filterFunc = (dest: string, appName: string, skip?: String[]) => {
   setTimeout(() => {
     let data = "";
 
+    //root index.ts file
     if (!filePathName()) {
       data = `
 ${[...new Set(importStatements)].join("; \n ")}
