@@ -1,5 +1,4 @@
 import fs from "fs-extra";
-import path from "path";
 
 let importStatements: String[] = [];
 let spreadImports: String[] = [];
@@ -58,9 +57,7 @@ export const ${appName}${resolverVariableName()}Resolvers = [
     }
 
     fs.writeFileSync(
-      `${path.resolve(
-        __dirname
-      )}/../../src/resolvers/${appName}/${filePathName()}/index.ts`,
+      `./src/resolvers/${appName}/${filePathName()}/index.ts`,
       data
     );
   }, 2000);

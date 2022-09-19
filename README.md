@@ -29,7 +29,7 @@ $ regen -n User -s f
 The above command generates a User folder with 'mutations' and 'queries' subfolders, skipping 'fields' subfolder
 ```
 
-### Skip more than one files
+### Skip more than one file
 
 ```
 $ regen -n User -s m q
