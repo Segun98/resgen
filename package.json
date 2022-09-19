@@ -26,7 +26,6 @@
   },
   "dependencies": {
     "fs-extra": "^10.1.0",
-    "ts-node": "^10.9.1",
     "yargs": "^17.5.1"
   },
   "bin": {
