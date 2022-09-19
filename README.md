@@ -30,7 +30,7 @@ The above command generates a User folder with 'mutations' and 'queries' subfold
 skipping 'fields' subfolder.
 
 
-+-- resolvers
+| +-- resolvers
 |    +-- User
 |       +-- mutations
 |           +-- index.ts
@@ -43,16 +43,28 @@ skipping 'fields' subfolder.
 ### Skip more than one file
 
 ```
-$ rgen -n Order -s m q
+$ rgen -n User -s m q
 ```
 
 ```
 The above command skips 'mutations' and 'queries' subfolders.
 
-+-- resolvers
-|    +-- Order
+| +-- resolvers
+|    +-- User
 |       +-- fields
-|           +-- index.ts
+|          +-- index.ts
 |    +-- index.ts
+
+```
+
+```
+This tool was modelled after the folder structure I use for my GraphQL server applications
+
+| +-- src
+|   +-- resolvers
+|      +-- User
+|        +-- fields
+|          +-- index.ts
+|      +-- index.ts
 
 ```
