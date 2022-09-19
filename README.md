@@ -26,15 +26,32 @@ $ rgen -n User -s f
 ```
 
 ```
-The above command generates a User folder with 'mutations' and 'queries' subfolders, skipping 'fields' subfolder
+The above command generates a User folder with 'mutations' and 'queries' subfolders, skipping 'fields' subfolder.
+
+
++-- resolvers
+|    +-- User
+|       +-- mutations
+|           +-- index.ts
+|        +-- queries
+|           +-- index.ts
+|    +-- index.ts
+
 ```
 
 ### Skip more than one file
 
 ```
-$ rgen -n User -s m q
+$ rgen -n Order -s m q
 ```
 
 ```
-The above command skips 'mutations' and 'queries' subfolders
+The above command skips 'mutations' and 'queries' subfolders.
+
++-- resolvers
+|    +-- Order
+|       +-- fields
+|           +-- index.ts
+|    +-- index.ts
+
 ```
