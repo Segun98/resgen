@@ -37,9 +37,10 @@ fs.mkdir(destDir, { recursive: true }, (err) => {
 
   fs.copySync(TEMPLATE_PATH, destDir, {
     filter: (_, dest) => {
-      return filterFunc(dest, input.skip);
+      return filterFunc(dest, trimmedAppName, input.skip);
     },
+    overwrite: true,
   });
 
-  process.exit(0);
+  //   process.exit(0);
 });
