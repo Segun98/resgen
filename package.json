@@ -1,5 +1,5 @@
 {
-  "name": "rgen",
+  "name": "resgen",
   "version": "1.0.0",
   "description": "CLI to generate GraphQL resolver files",
   "main": "src/index.js",
