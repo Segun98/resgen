@@ -1,9 +1,14 @@
 #!/usr/bin/env node
 import yargs from "yargs";
+import fs from "fs-extra";
+import path from "path";
+import { filterFunc } from "./utils/filterFunc";
+
+const TEMPLATE_PATH = `${path.resolve(__dirname)}/../src/template`;
 
 type Args = {
   ["name"]: string;
-  ["skip"]?: string;
+  ["skip"]?: string[];
 };
 
 const args = yargs(process.argv.slice(2)).options({
@@ -22,4 +27,19 @@ const args = yargs(process.argv.slice(2)).options({
 
 const input = args as Args;
 
-console.log(input);
+const appName = input.name;
+const trimmedAppName = appName.replace(/\s+/g, "");
+
+const destDir = `./src/resolvers/${trimmedAppName}`;
+
+fs.mkdir(destDir, { recursive: true }, (err) => {
+  console.log(err?.message ?? "");
+
+  fs.copySync(TEMPLATE_PATH, destDir, {
+    filter: (_, dest) => {
+      return filterFunc(dest, input.skip);
+    },
+  });
+
+  process.exit(0);
+});
