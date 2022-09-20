@@ -5,6 +5,8 @@ An opinionated CLI tool to generate GraphQL resolver folders and files
 ## Installing
 
 ```
+Install globally:
+
 $ npm i -g resgen or yarn global add resgen
 ```
 
@@ -26,8 +28,7 @@ $ rgen -n User -s f
 ```
 
 ```
-The above command generates a User folder with 'mutations' and 'queries' subfolders,
-skipping 'fields' subfolder.
+The above command generates a User folder with 'mutations' and 'queries' subfolders, skipping 'fields' subfolder.
 
 
 | +-- resolvers
@@ -36,7 +37,7 @@ skipping 'fields' subfolder.
 |           +-- index.ts
 |        +-- queries
 |           +-- index.ts
-|    +-- index.ts
+|      +-- index.ts
 
 ```
 
@@ -53,7 +54,7 @@ The above command skips 'mutations' and 'queries' subfolders.
 |    +-- User
 |       +-- fields
 |          +-- index.ts
-|    +-- index.ts
+|      +-- index.ts
 
 ```
 
@@ -62,9 +63,13 @@ This tool was modelled after the folder structure I use for my GraphQL server ap
 
 | +-- src
 |   +-- resolvers
-|      +-- User
+|     +-- User
 |        +-- fields
 |          +-- index.ts
-|      +-- index.ts
+|        +-- mutations
+|          +-- index.ts
+|        +-- queries
+|          +-- index.ts
+|       +-- index.ts
 
 ```
