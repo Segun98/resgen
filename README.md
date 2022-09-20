@@ -1,6 +1,6 @@
 # resgen
 
-An opinionated CLI tool to generate GraphQL resolver folders and files
+An opinionated CLI tool to generate GraphQL resolver folders
 
 ## Installing
 
@@ -28,7 +28,7 @@ $ rgen -n User -s f
 ```
 
 ```
-The above command generates a User folder with 'mutations' and 'queries' subfolders, skipping 'fields' subfolder.
+The above command generates a 'User' folder with 'mutations' and 'queries' subfolders, skipping 'fields' subfolder.
 
 
 | +-- resolvers
