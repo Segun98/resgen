@@ -41,7 +41,7 @@ The above command generates a 'User' folder with 'mutations' and 'queries' subfo
 
 ```
 
-### Skip more than one file
+### Skip more than one folder
 
 ```
 $ rgen -n User -s m q
