@@ -1,4 +1,5 @@
 import fs from "fs-extra";
+import prettier from "prettier";
 
 let importStatements: String[] = [];
 let spreadImports: String[] = [];
@@ -35,7 +36,7 @@ export const filterFunc = (dest: string, appName: string, skip?: String[]) => {
   //import resolvers to the root index.ts file
   if (resolverVariableName()) {
     importStatements.push(
-      `import {${appName}${resolverVariableName()}Resolvers } from "./${filePathName()}"`
+      `import { ${appName}${resolverVariableName()}Resolvers } from "./${filePathName()}"`
     );
     spreadImports.push(`...${appName}${resolverVariableName()}Resolvers`);
   }
@@ -58,9 +59,9 @@ export const ${appName}${resolverVariableName()}Resolvers = [
 
     fs.writeFileSync(
       `./src/resolvers/${appName}/${filePathName()}/index.ts`,
-      data
+      prettier.format(data, { semi: false, parser: "typescript" })
     );
-  }, 2000);
+  }, 50);
 
   return true;
 };

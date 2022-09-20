@@ -1,6 +1,6 @@
 {
   "name": "resgen",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "CLI to generate GraphQL resolver files",
   "main": "src/index.js",
   "scripts": {
@@ -19,7 +19,9 @@
     "typegraphql",
     "folder",
     "file",
-    "graphql file gen"
+    "graphql file gen",
+    "decorator",
+    "class resolver"
   ],
   "author": "",
   "license": "MIT",
@@ -30,11 +32,13 @@
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
     "@types/node": "^18.7.18",
+    "@types/prettier": "^2.7.0",
     "@types/yargs": "^17.0.12",
     "typescript": "^4.8.3"
   },
   "dependencies": {
     "fs-extra": "^10.1.0",
+    "prettier": "^2.7.1",
     "yargs": "^17.5.1"
   },
   "bin": {
