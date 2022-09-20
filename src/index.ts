@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 import yargs from "yargs";
 import fs from "fs-extra";
+import path from "path";
 import { filterFunc } from "./utils/filterFunc";
 
-const TEMPLATE_PATH = `./src/template`;
+const TEMPLATE_PATH = `${path.resolve(__dirname)}/../src/template`;
 
 type Args = {
   ["name"]: string;
