@@ -30,6 +30,8 @@ $ rgen -n User -s f
 ```
 The above command generates a 'User' folder with 'mutations' and 'queries' subfolders, skipping 'fields' subfolder.
 
+Note: rgen looks for a 'src' folder in your root directory and creates a 'resolvers' folder in 'src' if it doesn't exist.
+
 
 | +-- resolvers
 |    +-- User
