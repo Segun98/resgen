@@ -19,9 +19,9 @@ Options:
   -n, --name     folder name                                          [required]
   -s, --skip     skip a folder: fields (f), mutations(m), queries (q)
                                                choices: "f", "m", "q"
-  -qs --queries specify query names to be generated
-  -ms --mutations specify mutation names to be generated
-  -fs --fields specify field names to be generated
+  --qs --queries specify query names to be generated
+  --ms --mutations specify mutation names to be generated
+  --fs --fields specify field names to be generated
 ```
 
 ## Usage
@@ -50,7 +50,7 @@ Note: rgen looks for a 'src' folder in your root directory and creates a 'resolv
 
 ```
 
-$ rgen -n User -s f -qs getUser -ms createUser
+$ rgen -n User -s f --qs getUser --ms createUser
 
 `getUser` and `createUser`  files are added to the 'queries' and 'mutations' subfolders respectively. These files have a starter Class method.
 
