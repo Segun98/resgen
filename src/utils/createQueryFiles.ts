@@ -34,21 +34,21 @@ const resolverClass = (
 type CreateQueryFilesArgs = {
   appName: string;
   filePathName: string;
-  query: string[];
-  field: string[];
-  mutation: string[];
+  queries: string[];
+  fields: string[];
+  mutations: string[];
 };
 export const createQueryFiles = ({
   appName,
   filePathName,
-  query,
-  field,
-  mutation,
+  queries,
+  fields,
+  mutations,
 }: CreateQueryFilesArgs) => {
   const pascalCaseAppName = pascalCase(appName);
 
-  if (query?.length > 0 && filePathName === "queries") {
-    query.forEach((query) => {
+  if (queries?.length > 0 && filePathName === "queries") {
+    queries.forEach((query) => {
       fs.writeFileSync(
         `./src/resolvers/${appName}/${filePathName}/${query}.ts`,
         prettier.format(resolverClass(query, "query"), {
@@ -58,8 +58,8 @@ export const createQueryFiles = ({
       );
     });
   }
-  if (field?.length > 0 && filePathName === "fields") {
-    field.forEach((field) => {
+  if (fields?.length > 0 && filePathName === "fields") {
+    fields.forEach((field) => {
       fs.writeFileSync(
         `./src/resolvers/${appName}/${filePathName}/${field}.ts`,
         prettier.format(resolverClass(field, "field", pascalCaseAppName), {
@@ -70,8 +70,8 @@ export const createQueryFiles = ({
     });
   }
 
-  if (mutation?.length > 0 && filePathName === "mutations") {
-    mutation.forEach((mutation) => {
+  if (mutations?.length > 0 && filePathName === "mutations") {
+    mutations.forEach((mutation) => {
       fs.writeFileSync(
         `./src/resolvers/${appName}/${filePathName}/${mutation}.ts`,
         prettier.format(resolverClass(mutation, "mutation"), {

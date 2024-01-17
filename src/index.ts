@@ -9,9 +9,9 @@ const TEMPLATE_PATH = `${path.resolve(__dirname)}/../src/template`;
 type Args = {
   ["name"]: string;
   ["skip"]?: string[];
-  ["query"]?: string[];
-  ["field"]?: string[];
-  ["mutation"]?: string[];
+  ["queries"]?: string[];
+  ["fields"]?: string[];
+  ["mutations"]?: string[];
 };
 
 const args = yargs(process.argv.slice(2)).options({
@@ -26,19 +26,19 @@ const args = yargs(process.argv.slice(2)).options({
     describe: "skip a folder: field (f), mutation(m), queries (q)",
     choices: ["f", "m", "q"],
   },
-  query: {
+  queries: {
     type: "array",
-    alias: "q",
+    alias: "qs",
     describe: "specify query names to be generated",
   },
-  field: {
+  fields: {
     type: "array",
-    alias: "f",
+    alias: "fs",
     describe: "specify field names to be generated",
   },
-  mutation: {
+  mutations: {
     type: "array",
-    alias: "m",
+    alias: "ms",
     describe: "specify mutation names to be generated",
   },
 }).argv;

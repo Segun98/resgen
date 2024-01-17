@@ -9,16 +9,16 @@ let spreadImports: String[] = [];
 type Input = {
   ["name"]: string;
   ["skip"]?: string[];
-  ["query"]?: string[];
-  ["field"]?: string[];
-  ["mutation"]?: string[];
+  ["queries"]?: string[];
+  ["fields"]?: string[];
+  ["mutations"]?: string[];
 };
 
 export const filterFunc = (dest: string, appName: string, input?: Input) => {
   const skip = input?.skip;
-  const query = input?.query || [];
-  const field = input?.field || [];
-  const mutation = input?.mutation || [];
+  const queries = input?.queries || [];
+  const fields = input?.fields || [];
+  const mutations = input?.mutations || [];
 
   let destArr = dest.split("/");
   const isFieldsDir = destArr.some((item) => item === "fields");
@@ -76,9 +76,9 @@ export const ${appName}${resolverVariableName()}Resolvers = [
       generateQueryIndexFiles({
         appName,
         filePathName: filePathName(),
-        query,
-        field,
-        mutation,
+        queries,
+        fields,
+        mutations,
         resolverVariableName: resolverVariableName(),
       });
     }
@@ -86,9 +86,9 @@ export const ${appName}${resolverVariableName()}Resolvers = [
     createQueryFiles({
       appName,
       filePathName: filePathName(),
-      query,
-      field,
-      mutation,
+      queries,
+      fields,
+      mutations,
     });
   }, 50);
 

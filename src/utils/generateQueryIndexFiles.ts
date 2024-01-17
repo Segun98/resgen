@@ -5,23 +5,23 @@ import { pascalCase } from "case-anything";
 type GenerateQueryIndexFilesArgs = {
   appName: string;
   filePathName: "queries" | "fields" | "mutations" | "";
-  query: string[];
-  field: string[];
-  mutation: string[];
+  queries: string[];
+  fields: string[];
+  mutations: string[];
   resolverVariableName: string;
 };
 export const generateQueryIndexFiles = ({
   appName,
   filePathName,
-  query,
-  field,
-  mutation,
+  queries,
+  fields,
+  mutations,
   resolverVariableName,
 }: GenerateQueryIndexFilesArgs) => {
-  if (query?.length > 0 && filePathName === "queries") {
+  if (queries?.length > 0 && filePathName === "queries") {
     const imports: string[] = [];
     const exports: string[] = [];
-    query.forEach((query) => {
+    queries.forEach((query) => {
       imports.push(`import { ${pascalCase(query)}Resolver } from "./${query}"`);
       exports.push(`${pascalCase(query)}Resolver`);
     });
@@ -40,10 +40,10 @@ export const generateQueryIndexFiles = ({
     });
   }
 
-  if (field?.length > 0 && filePathName === "fields") {
+  if (fields?.length > 0 && filePathName === "fields") {
     const imports: string[] = [];
     const exports: string[] = [];
-    field.forEach((field) => {
+    fields.forEach((field) => {
       imports.push(
         `import { ${pascalCase(appName)}${pascalCase(
           field
@@ -66,10 +66,10 @@ export const generateQueryIndexFiles = ({
     });
   }
 
-  if (mutation?.length > 0 && filePathName === "mutations") {
+  if (mutations?.length > 0 && filePathName === "mutations") {
     const imports: string[] = [];
     const exports: string[] = [];
-    mutation.forEach((mutation) => {
+    mutations.forEach((mutation) => {
       imports.push(
         `import { ${pascalCase(mutation)}Resolver } from "./${mutation}"`
       );
@@ -91,7 +91,7 @@ export const generateQueryIndexFiles = ({
   }
 
   //create an index file if no queries
-  if (filePathName === "fields" && !field.length) {
+  if (filePathName === "fields" && !fields.length) {
     const data = `export const ${appName}${resolverVariableName}Resolvers = [];`;
 
     writeFile({
@@ -101,7 +101,7 @@ export const generateQueryIndexFiles = ({
     });
   }
 
-  if (filePathName === "mutations" && !mutation.length) {
+  if (filePathName === "mutations" && !mutations.length) {
     const data = `export const ${appName}${resolverVariableName}Resolvers = [];`;
 
     writeFile({
@@ -111,7 +111,7 @@ export const generateQueryIndexFiles = ({
     });
   }
 
-  if (filePathName === "queries" && !query.length) {
+  if (filePathName === "queries" && !queries.length) {
     const data = `export const ${appName}${resolverVariableName}Resolvers = [];`;
 
     writeFile({
