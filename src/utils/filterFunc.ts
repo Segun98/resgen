@@ -1,10 +1,25 @@
+import { createQueryFiles } from "./createQueryFiles";
+import { generateQueryIndexFiles } from "./generateQueryIndexFiles";
 import fs from "fs-extra";
 import prettier from "prettier";
 
 let importStatements: String[] = [];
 let spreadImports: String[] = [];
 
-export const filterFunc = (dest: string, appName: string, skip?: String[]) => {
+type Input = {
+  ["name"]: string;
+  ["skip"]?: string[];
+  ["query"]?: string[];
+  ["field"]?: string[];
+  ["mutation"]?: string[];
+};
+
+export const filterFunc = (dest: string, appName: string, input?: Input) => {
+  const skip = input?.skip;
+  const query = input?.query || [];
+  const field = input?.field || [];
+  const mutation = input?.mutation || [];
+
   let destArr = dest.split("/");
   const isFieldsDir = destArr.some((item) => item === "fields");
   const isMutationsDir = destArr.some((item) => item === "mutations");
@@ -53,14 +68,28 @@ export const ${appName}${resolverVariableName()}Resolvers = [
   ${[...new Set(spreadImports)].join(", \n ")}
 ];
 `;
+      fs.writeFileSync(
+        `./src/resolvers/${appName}/${filePathName()}/index.ts`,
+        prettier.format(data, { semi: false, parser: "typescript" })
+      );
     } else {
-      data = `export const ${appName}${resolverVariableName()}Resolvers = [];`;
+      generateQueryIndexFiles({
+        appName,
+        filePathName: filePathName(),
+        query,
+        field,
+        mutation,
+        resolverVariableName: resolverVariableName(),
+      });
     }
 
-    fs.writeFileSync(
-      `./src/resolvers/${appName}/${filePathName()}/index.ts`,
-      prettier.format(data, { semi: false, parser: "typescript" })
-    );
+    createQueryFiles({
+      appName,
+      filePathName: filePathName(),
+      query,
+      field,
+      mutation,
+    });
   }, 50);
 
   return true;

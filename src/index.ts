@@ -9,6 +9,9 @@ const TEMPLATE_PATH = `${path.resolve(__dirname)}/../src/template`;
 type Args = {
   ["name"]: string;
   ["skip"]?: string[];
+  ["query"]?: string[];
+  ["field"]?: string[];
+  ["mutation"]?: string[];
 };
 
 const args = yargs(process.argv.slice(2)).options({
@@ -22,6 +25,21 @@ const args = yargs(process.argv.slice(2)).options({
     alias: "s",
     describe: "skip a folder: field (f), mutation(m), queries (q)",
     choices: ["f", "m", "q"],
+  },
+  query: {
+    type: "array",
+    alias: "q",
+    describe: "specify query names to be generated",
+  },
+  field: {
+    type: "array",
+    alias: "f",
+    describe: "specify field names to be generated",
+  },
+  mutation: {
+    type: "array",
+    alias: "m",
+    describe: "specify mutation names to be generated",
   },
 }).argv;
 
@@ -37,7 +55,7 @@ fs.mkdir(destDir, { recursive: true }, (err) => {
 
   fs.copySync(TEMPLATE_PATH, destDir, {
     filter: (_, dest) => {
-      return filterFunc(dest, trimmedAppName, input.skip);
+      return filterFunc(dest, trimmedAppName, input);
     },
     overwrite: true,
   });
