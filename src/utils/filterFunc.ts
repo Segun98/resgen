@@ -1,7 +1,7 @@
-import { createQueryFiles } from "./createQueryFiles";
-import { generateQueryIndexFiles } from "./generateQueryIndexFiles";
+import { generateResolversIndexFile } from "./generateResolversIndexFile";
 import fs from "fs-extra";
 import prettier from "prettier";
+import { createResolverFiles } from "./createResolverFiles";
 
 let importStatements: String[] = [];
 let spreadImports: String[] = [];
@@ -73,7 +73,7 @@ export const ${appName}${resolverVariableName()}Resolvers = [
         prettier.format(data, { semi: false, parser: "typescript" })
       );
     } else {
-      generateQueryIndexFiles({
+      generateResolversIndexFile({
         appName,
         filePathName: filePathName(),
         queries,
@@ -83,7 +83,7 @@ export const ${appName}${resolverVariableName()}Resolvers = [
       });
     }
 
-    createQueryFiles({
+    createResolverFiles({
       appName,
       filePathName: filePathName(),
       queries,

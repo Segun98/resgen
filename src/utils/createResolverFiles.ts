@@ -10,7 +10,7 @@ const resolverClass = (
   let operationName = "Query";
 
   if (operationType === "field") {
-    operationName = "Field";
+    operationName = "FieldResolver";
   }
 
   if (operationType === "mutation") {
@@ -18,33 +18,36 @@ const resolverClass = (
   }
 
   return `
-    import { Ctx, ${operationName}, Resolver } from 'type-graphql';
+    import { Ctx,Arg, ${operationName}, Resolver } from 'type-graphql';
     
     @Resolver(() => ObjectType)
     export class ${parent ? parent : ""}${pascalCase(queryName)}Resolver {
       @${operationName}(() => ObjectType)
       ${camelCase(queryName)}(
+        @Ctx() ctx: CtxType,
+        @Arg("arg", ()=> String, {nullable:true}) arg: string
       ){
+        //resolver logic
       }
     }
   
     `;
 };
 
-type CreateQueryFilesArgs = {
+type CreateResolverFilesArgs = {
   appName: string;
   filePathName: string;
   queries: string[];
   fields: string[];
   mutations: string[];
 };
-export const createQueryFiles = ({
+export const createResolverFiles = ({
   appName,
   filePathName,
   queries,
   fields,
   mutations,
-}: CreateQueryFilesArgs) => {
+}: CreateResolverFilesArgs) => {
   const pascalCaseAppName = pascalCase(appName);
 
   if (queries?.length > 0 && filePathName === "queries") {
@@ -52,8 +55,12 @@ export const createQueryFiles = ({
       fs.writeFileSync(
         `./src/resolvers/${appName}/${filePathName}/${query}.ts`,
         prettier.format(resolverClass(query, "query"), {
-          semi: false,
           parser: "typescript",
+          semi: true,
+          singleQuote: true,
+          printWidth: 80,
+          arrowParens: "avoid",
+          trailingComma: "all",
         })
       );
     });
@@ -63,8 +70,12 @@ export const createQueryFiles = ({
       fs.writeFileSync(
         `./src/resolvers/${appName}/${filePathName}/${field}.ts`,
         prettier.format(resolverClass(field, "field", pascalCaseAppName), {
-          semi: false,
           parser: "typescript",
+          semi: true,
+          singleQuote: true,
+          printWidth: 80,
+          arrowParens: "avoid",
+          trailingComma: "all",
         })
       );
     });
@@ -75,8 +86,12 @@ export const createQueryFiles = ({
       fs.writeFileSync(
         `./src/resolvers/${appName}/${filePathName}/${mutation}.ts`,
         prettier.format(resolverClass(mutation, "mutation"), {
-          semi: false,
           parser: "typescript",
+          semi: true,
+          singleQuote: true,
+          printWidth: 80,
+          arrowParens: "avoid",
+          trailingComma: "all",
         })
       );
     });

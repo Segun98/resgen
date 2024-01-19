@@ -2,7 +2,7 @@ import fs from "fs-extra";
 import prettier from "prettier";
 import { pascalCase } from "case-anything";
 
-type GenerateQueryIndexFilesArgs = {
+type GenerateResolversIndexFileArgs = {
   appName: string;
   filePathName: "queries" | "fields" | "mutations" | "";
   queries: string[];
@@ -10,14 +10,14 @@ type GenerateQueryIndexFilesArgs = {
   mutations: string[];
   resolverVariableName: string;
 };
-export const generateQueryIndexFiles = ({
+export const generateResolversIndexFile = ({
   appName,
   filePathName,
   queries,
   fields,
   mutations,
   resolverVariableName,
-}: GenerateQueryIndexFilesArgs) => {
+}: GenerateResolversIndexFileArgs) => {
   if (queries?.length > 0 && filePathName === "queries") {
     const imports: string[] = [];
     const exports: string[] = [];
@@ -130,6 +130,13 @@ type WriteFileArgs = {
 const writeFile = ({ appName, filePathName, data }: WriteFileArgs) => {
   fs.writeFileSync(
     `./src/resolvers/${appName}/${filePathName}/index.ts`,
-    prettier.format(data, { semi: false, parser: "typescript" })
+    prettier.format(data, {
+      parser: "typescript",
+      semi: true,
+      singleQuote: true,
+      printWidth: 80,
+      arrowParens: "avoid",
+      trailingComma: "all",
+    })
   );
 };
