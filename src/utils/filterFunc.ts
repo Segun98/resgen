@@ -3,6 +3,14 @@ import fs from "fs-extra";
 import prettier from "prettier";
 import { createResolverFiles } from "./createResolverFiles";
 
+export const prettierConfig: prettier.Options = {
+  parser: "typescript",
+  semi: true,
+  singleQuote: true,
+  printWidth: 80,
+  arrowParens: "avoid",
+  trailingComma: "all",
+};
 let importStatements: String[] = [];
 let spreadImports: String[] = [];
 
@@ -70,14 +78,7 @@ export const ${appName}${resolverVariableName()}Resolvers = [
 `;
       fs.writeFileSync(
         `./src/resolvers/${appName}/${filePathName()}/index.ts`,
-        prettier.format(data, {
-          parser: "typescript",
-          semi: true,
-          singleQuote: true,
-          printWidth: 80,
-          arrowParens: "avoid",
-          trailingComma: "all",
-        })
+        prettier.format(data, prettierConfig)
       );
     } else {
       generateResolversIndexFile({

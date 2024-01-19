@@ -1,6 +1,7 @@
 import { camelCase, pascalCase } from "case-anything";
 import prettier from "prettier";
 import fs from "fs-extra";
+import { prettierConfig } from "./filterFunc";
 
 const resolverClass = (
   queryName: string,
@@ -82,15 +83,5 @@ type WriteFileArgs = {
   data: string;
 };
 const writeFile = ({ path, data }: WriteFileArgs) => {
-  fs.writeFileSync(
-    path,
-    prettier.format(data, {
-      parser: "typescript",
-      semi: true,
-      singleQuote: true,
-      printWidth: 80,
-      arrowParens: "avoid",
-      trailingComma: "all",
-    })
-  );
+  fs.writeFileSync(path, prettier.format(data, prettierConfig));
 };

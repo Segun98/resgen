@@ -1,6 +1,7 @@
 import fs from "fs-extra";
 import prettier from "prettier";
 import { pascalCase } from "case-anything";
+import { prettierConfig } from "./filterFunc";
 
 type GenerateResolversIndexFileArgs = {
   appName: string;
@@ -130,13 +131,6 @@ type WriteFileArgs = {
 const writeFile = ({ appName, filePathName, data }: WriteFileArgs) => {
   fs.writeFileSync(
     `./src/resolvers/${appName}/${filePathName}/index.ts`,
-    prettier.format(data, {
-      parser: "typescript",
-      semi: true,
-      singleQuote: true,
-      printWidth: 80,
-      arrowParens: "avoid",
-      trailingComma: "all",
-    })
+    prettier.format(data, prettierConfig)
   );
 };
