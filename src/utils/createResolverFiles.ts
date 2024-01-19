@@ -52,48 +52,45 @@ export const createResolverFiles = ({
 
   if (queries?.length > 0 && filePathName === "queries") {
     queries.forEach((query) => {
-      fs.writeFileSync(
-        `./src/resolvers/${appName}/${filePathName}/${query}.ts`,
-        prettier.format(resolverClass(query, "query"), {
-          parser: "typescript",
-          semi: true,
-          singleQuote: true,
-          printWidth: 80,
-          arrowParens: "avoid",
-          trailingComma: "all",
-        })
-      );
+      writeFile({
+        path: `./src/resolvers/${appName}/${filePathName}/${query}.ts`,
+        data: resolverClass(query, "query"),
+      });
     });
   }
   if (fields?.length > 0 && filePathName === "fields") {
     fields.forEach((field) => {
-      fs.writeFileSync(
-        `./src/resolvers/${appName}/${filePathName}/${field}.ts`,
-        prettier.format(resolverClass(field, "field", pascalCaseAppName), {
-          parser: "typescript",
-          semi: true,
-          singleQuote: true,
-          printWidth: 80,
-          arrowParens: "avoid",
-          trailingComma: "all",
-        })
-      );
+      writeFile({
+        path: `./src/resolvers/${appName}/${filePathName}/${field}.ts`,
+        data: resolverClass(field, "field", pascalCaseAppName),
+      });
     });
   }
 
   if (mutations?.length > 0 && filePathName === "mutations") {
     mutations.forEach((mutation) => {
-      fs.writeFileSync(
-        `./src/resolvers/${appName}/${filePathName}/${mutation}.ts`,
-        prettier.format(resolverClass(mutation, "mutation"), {
-          parser: "typescript",
-          semi: true,
-          singleQuote: true,
-          printWidth: 80,
-          arrowParens: "avoid",
-          trailingComma: "all",
-        })
-      );
+      writeFile({
+        path: `./src/resolvers/${appName}/${filePathName}/${mutation}.ts`,
+        data: resolverClass(mutation, "mutation"),
+      });
     });
   }
+};
+
+type WriteFileArgs = {
+  path: string;
+  data: string;
+};
+const writeFile = ({ path, data }: WriteFileArgs) => {
+  fs.writeFileSync(
+    path,
+    prettier.format(data, {
+      parser: "typescript",
+      semi: true,
+      singleQuote: true,
+      printWidth: 80,
+      arrowParens: "avoid",
+      trailingComma: "all",
+    })
+  );
 };
