@@ -70,7 +70,14 @@ export const ${appName}${resolverVariableName()}Resolvers = [
 `;
       fs.writeFileSync(
         `./src/resolvers/${appName}/${filePathName()}/index.ts`,
-        prettier.format(data, { semi: false, parser: "typescript" })
+        prettier.format(data, {
+          parser: "typescript",
+          semi: true,
+          singleQuote: true,
+          printWidth: 80,
+          arrowParens: "avoid",
+          trailingComma: "all",
+        })
       );
     } else {
       generateResolversIndexFile({
